@@ -14,3 +14,8 @@ async def get_all(skip: int = 0, limit: int = 100, word_service: WordService = D
 @word_router.post("/create")
 async def create(create_word_model: CreateWordModel, word_service: WordService = Depends()) -> WordModel:
     return word_service.add_one(create_word_model)
+
+
+@word_router.get("/search/")
+async def find_by_value(word: str, word_service: WordService = Depends()) -> WordModel:
+    return word_service.find_by_value(word)

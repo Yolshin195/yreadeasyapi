@@ -18,5 +18,5 @@ class ArticleElement(BaseEntity):
     article: Mapped["Article"] = relationship(back_populates="article_elements")
 
     sentences: Mapped[list["Sentence"]] = relationship(
-        back_populates="sentence", cascade="all, delete-orphan"
+        back_populates="article_element", cascade="all, delete-orphan"
     )

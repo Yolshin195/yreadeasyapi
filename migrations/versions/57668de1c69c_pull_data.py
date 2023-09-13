@@ -1,8 +1,8 @@
 """pull data
 
-Revision ID: 52e5e6f8d600
-Revises: f58c3a575f14
-Create Date: 2023-09-13 08:27:18.175016
+Revision ID: 57668de1c69c
+Revises: 7ddf550fb781
+Create Date: 2023-09-13 18:11:05.334918
 
 """
 from typing import Sequence, Union
@@ -14,11 +14,13 @@ from sqlalchemy.orm import Session
 
 from entity import PartOfSpeechReference, LanguageReference
 
+
 # revision identifiers, used by Alembic.
-revision: str = '52e5e6f8d600'
-down_revision: Union[str, None] = 'f58c3a575f14'
+revision: str = '57668de1c69c'
+down_revision: Union[str, None] = '7ddf550fb781'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
+
 
 uuid1 = "90d04c35-7efb-47ee-92f9-b52304643639"
 uuid2 = "243359cc-323c-4d2b-bb5f-02f1bd63510c"

@@ -30,3 +30,7 @@ class WordService(BaseService):
         )
         word = self.repository.add_one(word)
         return word_model_mapper(word)
+
+    def find_by_value(self, value: str) -> WordModel:
+        word = self.repository.find_by_value(value)
+        return word_model_mapper(word) if word else None

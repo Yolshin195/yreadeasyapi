@@ -11,7 +11,7 @@ from .part_of_speech_reference import PartOfSpeechReference
 class Word(BaseEntity):
     __tablename__ = BaseEntity.build_table_name("word")
 
-    value: Mapped[str]
+    value: Mapped[str] = mapped_column(unique=True)
     description: Mapped[str | None]
     example_use: Mapped[str | None]
     transcription: Mapped[str | None]
