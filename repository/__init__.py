@@ -1,0 +1,3 @@
+from .language_reference_repository import LanguageReferenceRepository
+from .part_of_speech_reference_repository import PartOfSpeechReferenceRepository
+from .word_repository import WordRepository
