@@ -3,7 +3,8 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
-from model.reference_model import ReferenceModel
+from .reference_model import ReferenceModel
+from .translation_word_model import TranslationWordModel
 
 
 class CreateWordModel(BaseModel):
@@ -15,15 +16,6 @@ class CreateWordModel(BaseModel):
     language_code: str
 
 
-class TranslationWordModel(BaseModel):
-    value: str
-    description: Optional[str]
-    example_use: Optional[str]
-    transcription: Optional[str]
-    part_of_speech: "ReferenceModel"
-    language: "ReferenceModel"
-
-
 class WordModel(BaseModel):
     id: UUID
     value: str
@@ -32,3 +24,4 @@ class WordModel(BaseModel):
     transcription: Optional[str] = None
     part_of_speech: "ReferenceModel"
     language: "ReferenceModel"
+    translation: list[TranslationWordModel]

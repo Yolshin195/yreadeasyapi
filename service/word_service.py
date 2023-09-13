@@ -1,8 +1,9 @@
 from entity import Word
-from model.reference_model import ReferenceModel
+from mapper.word_model_mapper import word_model_mapper
 from model.word_model import WordModel, CreateWordModel
 from repository import WordRepository, LanguageReferenceRepository, PartOfSpeechReferenceRepository
 from .base_service import BaseService
+from .translation_service import TranslationService
 
 
 class WordService(BaseService):
@@ -11,14 +12,10 @@ class WordService(BaseService):
         self.repository = WordRepository(self.session)
         self.language_reference_repository = LanguageReferenceRepository(self.session)
         self.part_of_speech_reference_repository = PartOfSpeechReferenceRepository(self.session)
+        self.translation_service = TranslationService(self.session)
 
     def find_all(self, skip: int = 0, limit: int = 100) -> list[WordModel]:
-        return [WordModel(id=word.id, value=word.value,
-                          description=word.description,
-                          example_use=word.example_use,
-                          transcription=word.transcription,
-                          part_of_speech=build_reference(word.part_of_speech),
-                          language=build_reference(word.language)) for word
+        return [word_model_mapper(word, self.translation_service.find_by_from_word(word)) for word
                 in self.repository.find_all(skip, limit)]
 
     def add_one(self, create_word_model: CreateWordModel) -> WordModel:
@@ -34,20 +31,4 @@ class WordService(BaseService):
 
         word = self.repository.add_one(word)
 
-        return WordModel(
-            id=word.id,
-            value=word.value,
-            description=word.description,
-            example_use=word.example_use,
-            transcription=word.transcription,
-            part_of_speech=build_reference(word.part_of_speech),
-            language=build_reference(word.language)
-        )
-
-
-def build_reference(reference) -> ReferenceModel:
-    return ReferenceModel(
-        id=reference.id,
-        code=reference.code,
-        name=reference.name
-    )
+        return word_model_mapper(word)
