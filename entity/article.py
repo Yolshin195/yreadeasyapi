@@ -11,6 +11,7 @@ if TYPE_CHECKING:
 class Article(BaseEntity):
     __tablename__ = BaseEntity.build_table_name("article")
 
+    title: Mapped[str]
     original_content: Mapped[str]
     source_link: Mapped[str]
 
