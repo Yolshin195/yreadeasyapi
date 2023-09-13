@@ -12,7 +12,7 @@ async def get_all(skip: int = 0, limit: int = 100,
     return translation_service.find_all(skip, limit)
 
 
-@translation_router.put("/create")
+@translation_router.post("/create")
 async def create(create_translation_model: CreateTranslationModel,
                  translation_service: TranslationService = Depends()):
     return translation_service.add_one(create_translation_model)

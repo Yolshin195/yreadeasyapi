@@ -24,11 +24,9 @@ class WordService(BaseService):
             description=create_word_model.description,
             example_use=create_word_model.example_use,
             transcription=create_word_model.transcription,
+            part_of_speech=self.part_of_speech_reference_repository.find_by_code(
+                create_word_model.part_of_speech_code),
+            language=self.language_reference_repository.find_by_code(create_word_model.language_code)
         )
-        word.part_of_speech = self.part_of_speech_reference_repository.find_by_code(
-            create_word_model.part_of_speech_code)
-        word.language = self.language_reference_repository.find_by_code(create_word_model.language_code)
-
         word = self.repository.add_one(word)
-
         return word_model_mapper(word)

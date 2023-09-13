@@ -19,7 +19,6 @@ class TranslationService(BaseService):
             from_word=self.word_repository.find_by_id(create_translation_model.from_word_id),
             to_word=self.word_repository.find_by_id(create_translation_model.to_word_id)
         )
-
         translation = self.translation_repository.add_one(translation)
         return translation_model_mapper(translation)
 
